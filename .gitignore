@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+examples/.ipynb_checkpoints
+pyxiv/__pycache__
+examples/papers/
+examples/papers/
+__pycache__/
+*.pdf
