@@ -20,7 +20,7 @@ You can verify that you have a CUDA-capable GPU through the Display Adapters sec
 control /name Microsoft.DeviceManager
 ```
 
-you can install cuda from this site
+you can install cuda from this site, we will install the version 11.8.0
 https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Windows
 
 In this project we will test different models, ones that can ran from local and online. 
@@ -30,6 +30,11 @@ nvcc --version
 ```
 
 ![](assets/20230928114135.png)
+
+Then we need to install the Cuda Toolkit 11.8.0
+
+https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_522.06_windows.exe
+
 
 ## Step 3: Create a Python virtual environment
 A Python virtual environment allows one to use different versions of Python as well as isolate dependencies between projects. If you’ve never had several repos on your machine at once, you may never have felt this need but it’s a good, Pythonic choice nonetheless. Future you will thank us both!
@@ -48,11 +53,18 @@ python  -m venv .arxiv_environment
 
 You’ll notice a new directory in your current working directory with the same name as your virtual environment.
 
-Activate the virtual environment.
+Activate the virtual environment
 
 In Windows you type
 
+```
+
 .arxiv_environment\Scripts\activate.bat
+
+```
+
+
+
 All other OSs: source
 
 ```
@@ -64,24 +76,48 @@ and we install the libraries neeeded for this project
 First we update our pip
 ```
 python.exe -m pip install --upgrade pip
+
 ```
 then we install our libraries
 
-```
-pip install "ibm-watson-machine-learning>=1.0.312" 
-pip install PyMuPDF
-pip install tensorflow-hub
-pip install gradio==3.33.1
-pip install ipykernel
-pip install notebook
-pip insatll openai
-pip install scikit-learn
-pip install transformers
-pip install ipywidgets
-pip install torch --index-url https://download.pytorch.org/whl/cu118
+
+we create the following requirements.txt file
+
 
 ```
+#requirements.txt
+ibm-watson-machine-learning>=1.0.312
+PyMuPDF
+tensorflow==2.9.2
+tensorflow-hub==0.12.0
+scikit-learn==1.0.2
+gradio==3.37.0
+ipykernel
+notebook
+openai
+transformers
+ipywidgets
+torch --index-url https://download.pytorch.org/whl/cu118
+
+```
+and then we install
+```
+pip install -r requirements.txt
+```
+
+then can install 
 
 ```
 python -m ipykernel install --user --name ArxivChat --display-name "Python (ArxivChat)"
 ```
+
+
+#Troobleissues
+
+If your computer says  Could not load dynamic library cudnn64_8.dll
+go to you environment
+`C:\ArxivChat\.arxiv_environment\Lib\site-packages\torch\lib `
+
+and copy cudnn64_8.dll int the following folder
+
+`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`

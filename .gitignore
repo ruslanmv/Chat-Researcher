@@ -5,3 +5,4 @@ examples/papers/
 examples/papers/
 __pycache__/
 *.pdf
+universal-sentence-encoder_4/

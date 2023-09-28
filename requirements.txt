@@ -1,7 +1,12 @@
-#gradio
+ibm-watson-machine-learning>=1.0.312
 PyMuPDF
-#numpy
-scikit-learn
-tensorflow
-tensorflow-hub
+tensorflow==2.9.2
+tensorflow-hub==0.12.0
+scikit-learn==1.0.2
+gradio==3.37.0
+ipykernel
+notebook
 openai
+transformers
+ipywidgets
+torch --index-url https://download.pytorch.org/whl/cu118
