@@ -1,7 +1,7 @@
 #gradio
 PyMuPDF
 #numpy
-#scikit-learn
-#tensorflow
+scikit-learn
+tensorflow
 tensorflow-hub
-#:openai
+openai
