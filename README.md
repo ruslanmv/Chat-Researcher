@@ -23,6 +23,11 @@ control /name Microsoft.DeviceManager
 you can install cuda from this site, we will install the version 11.8.0
 https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Windows
 
+Then we need to install the Cuda Toolkit 11.8.0
+
+https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_522.06_windows.exe
+
+
 In this project we will test different models, ones that can ran from local and online. 
 
 ```
@@ -30,11 +35,6 @@ nvcc --version
 ```
 
 ![](assets/20230928114135.png)
-
-Then we need to install the Cuda Toolkit 11.8.0
-
-https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_522.06_windows.exe
-
 
 ## Step 3: Create a Python virtual environment
 A Python virtual environment allows one to use different versions of Python as well as isolate dependencies between projects. If you’ve never had several repos on your machine at once, you may never have felt this need but it’s a good, Pythonic choice nonetheless. Future you will thank us both!
@@ -48,7 +48,7 @@ mkdir ArxivChat
 ```
 Run the following command:
 ```
-python  -m venv .arxiv_environment
+python  -m venv .arxiv_env
 ```
 
 You’ll notice a new directory in your current working directory with the same name as your virtual environment.
@@ -58,8 +58,7 @@ Activate the virtual environment
 In Windows you type
 
 ```
-
-.arxiv_environment\Scripts\activate.bat
+.arxiv_env\Scripts\activate.bat
 
 ```
 
@@ -68,7 +67,7 @@ In Windows you type
 All other OSs: source
 
 ```
-./.arxiv_environment/bin/activate
+./.arxiv_env/bin/activate
 
 ```
 and we install the libraries neeeded for this project
@@ -83,13 +82,15 @@ then we install our libraries
 
 we create the following requirements.txt file
 
+```
+notepad requirements.txt
+```
 
 ```
-#requirements.txt
 ibm-watson-machine-learning>=1.0.312
 PyMuPDF
-tensorflow==2.9.2
-tensorflow-hub==0.12.0
+tensorflow==2.12.0
+tensorflow-hub
 scikit-learn==1.0.2
 gradio==3.37.0
 ipykernel
@@ -97,19 +98,41 @@ notebook
 openai
 transformers
 ipywidgets
+torchvision 
+torchaudio
+accelerate
 torch --index-url https://download.pytorch.org/whl/cu118
 
+
 ```
+p
+
 and then we install
 ```
 pip install -r requirements.txt
 ```
 
-then can install 
+then we Set Up PyTorch with GPU Support on Windows 11 
+
+```
+pip install torchvision torch --index-url https://download.pytorch.org/whl/cu118
+
+```
+
+
 
 ```
 python -m ipykernel install --user --name ArxivChat --display-name "Python (ArxivChat)"
 ```
+
+Lastly, we need to verify that PyTorch has been installed with CUDA support.
+
+```
+import torch
+print("Torch version:",torch.__version__)
+print("Is CUDA enabled?",torch.cuda.is_available())
+```
+If the output to "Is CUDA enabled" is True , then we have successfully installed PyTorch with CUDA support.
 
 
 #Troobleissues

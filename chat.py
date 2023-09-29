@@ -89,8 +89,6 @@ class SemanticSearch:
         embeddings = np.vstack(embeddings)
         return embeddings
 
-
-
 def load_recommender(path, start_page=1):
     global recommender
     texts = pdf_to_text(path, start_page=start_page)
