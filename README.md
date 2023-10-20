@@ -44,7 +44,7 @@ First we create a folder where we are going to build our project
 ```
 cd \
 mkdir ArxivChat
-
+cd  ArxivChat
 ```
 Run the following command:
 ```
@@ -59,23 +59,18 @@ In Windows you type
 
 ```
 .arxiv_env\Scripts\activate.bat
-
 ```
-
-
 
 All other OSs: source
 
 ```
 ./.arxiv_env/bin/activate
-
 ```
 and we install the libraries neeeded for this project
 
 First we update our pip
 ```
 python.exe -m pip install --upgrade pip
-
 ```
 then we install our libraries
 
@@ -89,7 +84,8 @@ notepad requirements.txt
 ```
 ibm-watson-machine-learning>=1.0.312
 PyMuPDF
-tensorflow==2.12.0
+#tensorflow==2.12.0
+tensorflow==2.9.2
 tensorflow-hub
 scikit-learn==1.0.2
 gradio==3.37.0
@@ -98,15 +94,10 @@ notebook
 openai
 transformers
 ipywidgets
-torchvision 
-torchaudio
 accelerate
-torch --index-url https://download.pytorch.org/whl/cu118
-
-
+PyPDF2~=2.0
+nltk
 ```
-p
-
 and then we install
 ```
 pip install -r requirements.txt
@@ -115,11 +106,10 @@ pip install -r requirements.txt
 then we Set Up PyTorch with GPU Support on Windows 11 
 
 ```
-pip install torchvision torch --index-url https://download.pytorch.org/whl/cu118
-
+pip install torchaudio torchvision torch --index-url https://download.pytorch.org/whl/cu118
 ```
 
-
+and
 
 ```
 python -m ipykernel install --user --name ArxivChat --display-name "Python (ArxivChat)"
@@ -134,13 +124,35 @@ print("Is CUDA enabled?",torch.cuda.is_available())
 ```
 If the output to "Is CUDA enabled" is True , then we have successfully installed PyTorch with CUDA support.
 
+# Troubleissues
 
-#Troobleissues
+- If your computer says  Could not load dynamic library cudnn64_8.dll
+  go to you environment
+  `C:\ArxivChat\.arxiv_environment\Lib\site-packages\torch\lib `
 
-If your computer says  Could not load dynamic library cudnn64_8.dll
-go to you environment
-`C:\ArxivChat\.arxiv_environment\Lib\site-packages\torch\lib `
+  and copy cudnn64_8.dll int the following folder
 
-and copy cudnn64_8.dll int the following folder
+  `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
 
-`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
+During your test 
+
+```
+import torch
+ print("Is CUDA enabled?",torch.cuda.is_available())
+```
+
+
+Is CUDA enabled? False,
+
+try 
+
+```
+pip uninstall torch
+```
+
+and try again
+
+```
+pip install torchaudio torchvision torch --index-url https://download.pytorch.org/whl/cu118
+```
+
